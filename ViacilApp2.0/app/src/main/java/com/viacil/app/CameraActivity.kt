@@ -13,6 +13,11 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.mlkit.common.model.DownloadConditions
+import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.Translator
+import com.google.mlkit.nl.translate.TranslatorOptions
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
@@ -24,11 +29,14 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
     private lateinit var cameraExecutor: ExecutorService
     private val textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+    private var translator: Translator? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setupTranslator()
 
         if (allPermissionsGranted()) {
             startCamera()
@@ -37,6 +45,27 @@ class CameraActivity : AppCompatActivity() {
         }
 
         cameraExecutor = Executors.newSingleThreadExecutor()
+    }
+
+    private fun setupTranslator() {
+        val options = TranslatorOptions.Builder()
+            .setSourceLanguage(TranslateLanguage.SPANISH)
+            .setTargetLanguage(TranslateLanguage.ENGLISH)
+            .build()
+
+        translator = Translation.getClient(options)
+
+        val conditions = DownloadConditions.Builder()
+            .requireWifi()
+            .build()
+
+        translator?.downloadModelIfNeeded(conditions)
+            ?.addOnSuccessListener {
+                Log.d("MLKit", "Translation model downloaded")
+            }
+            ?.addOnFailureListener { e ->
+                Log.e("MLKit", "Failed to download translation model", e)
+            }
     }
 
     private fun startCamera() {
@@ -72,10 +101,21 @@ class CameraActivity : AppCompatActivity() {
             textRecognizer.process(image)
                 .addOnSuccessListener { visionText ->
                     if (visionText.text.isNotEmpty()) {
+                        val detectedText = visionText.text
                         runOnUiThread {
-                            binding.tvDetectedText.text = visionText.text
-                            // TODO: Add translation here
+                            binding.tvOriginalText.text = detectedText
                         }
+
+                        // Translate in real time
+                        translator?.translate(detectedText)
+                            ?.addOnSuccessListener { translatedText ->
+                                runOnUiThread {
+                                    binding.tvTranslatedText.text = translatedText
+                                }
+                            }
+                            ?.addOnFailureListener { e ->
+                                Log.e("MLKit", "Translation failed", e)
+                            }
                     }
                 }
                 .addOnFailureListener { e ->
@@ -106,6 +146,7 @@ class CameraActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
+        translator?.close()
     }
 
     companion object {
