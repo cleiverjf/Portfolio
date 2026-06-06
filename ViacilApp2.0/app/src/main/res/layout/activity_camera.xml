@@ -13,16 +13,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvDetectedText"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#80000000"
-        android:padding="16dp"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:orientation="vertical"
+        android:background="#AA000000"
+        android:padding="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tvOriginalText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:text="Texto detectado..." />
+
+        <TextView
+            android:id="@+id/tvTranslatedText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#03DAC6"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="Traducción..." />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
