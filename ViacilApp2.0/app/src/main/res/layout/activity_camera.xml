@@ -16,9 +16,9 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="#CC000000"
         android:orientation="vertical"
-        android:background="#AA000000"
-        android:padding="12dp"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -27,19 +27,19 @@
             android:id="@+id/tvOriginalText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Texto detectado aparecerá aquí..."
             android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:text="Texto detectado..." />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tvTranslatedText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
+            android:text="Traducción aparecerá aquí..."
             android:textColor="#03DAC6"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="Traducción..." />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
