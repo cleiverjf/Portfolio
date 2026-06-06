@@ -17,5 +17,10 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bottomNavigation.setupWithNavController(navController)
+
+        // Custom transitions
+        navController.addOnDestinationChangedListener { _, _, _ ->
+            overridePendingTransition(R.anim.scale_up, R.anim.slide_in_right)
+        }
     }
 }
