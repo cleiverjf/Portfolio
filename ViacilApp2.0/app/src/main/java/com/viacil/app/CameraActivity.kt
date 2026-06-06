@@ -61,35 +61,42 @@ class CameraActivity : AppCompatActivity() {
 
         translator?.downloadModelIfNeeded(conditions)
             ?.addOnSuccessListener {
-                Log.d("MLKit", "Translation model downloaded")
+                Log.d("MLKit", "Translation model downloaded successfully")
             }
             ?.addOnFailureListener { e ->
                 Log.e("MLKit", "Failed to download translation model", e)
+                runOnUiThread {
+                    Toast.makeText(this, "No se pudo descargar el modelo de traducción", Toast.LENGTH_LONG).show()
+                }
             }
     }
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         cameraProviderFuture.addListener({
-            val cameraProvider = cameraProviderFuture.get()
-            val preview = Preview.Builder().build().also {
-                it.setSurfaceProvider(binding.previewView.surfaceProvider)
-            }
-
-            val imageAnalyzer = ImageAnalysis.Builder()
-                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                .build()
-                .also {
-                    it.setAnalyzer(cameraExecutor, ::analyzeImage)
+            try {
+                val cameraProvider = cameraProviderFuture.get()
+                val preview = Preview.Builder().build().also {
+                    it.setSurfaceProvider(binding.previewView.surfaceProvider)
                 }
 
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+                val imageAnalyzer = ImageAnalysis.Builder()
+                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                    .build()
+                    .also {
+                        it.setAnalyzer(cameraExecutor, ::analyzeImage)
+                    }
 
-            try {
+                val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer)
+
             } catch (exc: Exception) {
                 Log.e("Camera", "Use case binding failed", exc)
+                runOnUiThread {
+                    Toast.makeText(this, "Error al iniciar la cámara", Toast.LENGTH_SHORT).show()
+                }
             }
         }, ContextCompat.getMainExecutor(this))
     }
@@ -106,7 +113,6 @@ class CameraActivity : AppCompatActivity() {
                             binding.tvOriginalText.text = detectedText
                         }
 
-                        // Translate in real time
                         translator?.translate(detectedText)
                             ?.addOnSuccessListener { translatedText ->
                                 runOnUiThread {
@@ -115,11 +121,17 @@ class CameraActivity : AppCompatActivity() {
                             }
                             ?.addOnFailureListener { e ->
                                 Log.e("MLKit", "Translation failed", e)
+                                runOnUiThread {
+                                    binding.tvTranslatedText.text = "Error en traducción"
+                                }
                             }
                     }
                 }
                 .addOnFailureListener { e ->
                     Log.e("MLKit", "Text recognition failed", e)
+                    runOnUiThread {
+                        binding.tvOriginalText.text = "Error detectando texto"
+                    }
                 }
                 .addOnCompleteListener {
                     imageProxy.close()
@@ -137,7 +149,7 @@ class CameraActivity : AppCompatActivity() {
             if (allPermissionsGranted()) {
                 startCamera()
             } else {
-                Toast.makeText(this, "Permisos denegados", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Permisos de cámara denegados", Toast.LENGTH_SHORT).show()
                 finish()
             }
         }
