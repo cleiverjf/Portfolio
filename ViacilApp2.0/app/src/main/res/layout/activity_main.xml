@@ -1,48 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:padding="24dp">
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
         android:text="Viacil"
-        android:textSize="36sp"
+        android:textColor="@color/primary"
+        android:textSize="42sp"
         android:textStyle="bold"
-        android:contentDescription="Logo de Viacil - App de traducción accesible" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Traducción accesible"
+        android:textColor="@color/on_background"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCamera"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Cámara en Vivo"
-        android:contentDescription="Abrir cámara para traducción en tiempo real" />
+        android:layout_marginTop="48dp"
+        android:padding="16dp"
+        android:text="📷  Cámara en Vivo"
+        android:textSize="18sp"
+        app:cornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitle" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnInterpreter"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Intérprete de Frases"
-        android:contentDescription="Abrir lista de frases rápidas con voz" />
+        android:padding="16dp"
+        android:text="🗣️  Intérprete de Frases"
+        android:textSize="18sp"
+        app:cornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnCamera" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnTranslation"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Traducir Texto"
-        android:contentDescription="Abrir traducción manual de texto" />
+        android:padding="16dp"
+        android:text="✍️  Traducir Texto"
+        android:textSize="18sp"
+        app:cornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnInterpreter" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSettings"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Ajustes de Accesibilidad"
-        android:contentDescription="Configurar opciones de accesibilidad y daltonismo" />
+        android:padding="16dp"
+        android:text="⚙️  Ajustes de Accesibilidad"
+        android:textSize="18sp"
+        app:cornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnTranslation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
