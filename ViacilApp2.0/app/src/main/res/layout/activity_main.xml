@@ -1,69 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:padding="32dp"
-    tools:context=".MainActivity">
-
-    <!-- Título principal -->
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="42sp"
-        android:textStyle="bold"
-        android:textColor="@color/primary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="64dp" />
+    android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tvSubtitle"
+        android:text="Viacil"
+        android:textSize="32sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/subtitle"
-        android:textSize="18sp"
-        android:textColor="@color/on_background"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_height="wrap_content" />
 
-    <!-- Botón Cámara -->
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/btnCamera"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_camera"
-        android:textSize="18sp"
-        app:icon="@drawable/ic_camera"
-        app:iconGravity="top"
-        app:iconPadding="12dp"
-        android:layout_marginTop="80dp"
-        style="@style/Widget.Material3.Button.LargeButton"
-        app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="Cámara en Vivo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    <!-- Botón Intérprete -->
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/btnInterpreter"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_interpreter"
-        android:textSize="18sp"
-        app:icon="@drawable/ic_interpreter"
-        app:iconGravity="top"
-        app:iconPadding="12dp"
-        android:layout_marginTop="24dp"
-        style="@style/Widget.Material3.Button.LargeButton"
-        app:layout_constraintTop_toBottomOf="@id/btnCamera"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="Intérprete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
