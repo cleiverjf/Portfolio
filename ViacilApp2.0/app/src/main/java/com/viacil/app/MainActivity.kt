@@ -1,8 +1,9 @@
 package com.viacil.app
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.viacil.app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,17 +14,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnCamera.setOnClickListener {
-            startActivity(Intent(this, CameraActivity::class.java))
-        }
-        binding.btnInterpreter.setOnClickListener {
-            startActivity(Intent(this, InterpreterActivity::class.java))
-        }
-        binding.btnTranslation.setOnClickListener {
-            startActivity(Intent(this, TranslationActivity::class.java))
-        }
-        binding.btnSettings.setOnClickListener {
-            startActivity(Intent(this, SettingsActivity::class.java))
-        }
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        binding.bottomNavigation.setupWithNavController(navController)
     }
 }
