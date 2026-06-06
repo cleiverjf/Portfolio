@@ -2,23 +2,26 @@ package com.viacil.app
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val cameraButton = findViewById<Button>(R.id.btnCamera)
-        val interpreterButton = findViewById<Button>(R.id.btnInterpreter)
+        val btnCamera: MaterialButton = findViewById(R.id.btnCamera)
+        val btnInterpreter: MaterialButton = findViewById(R.id.btnInterpreter)
 
-        cameraButton.setOnClickListener {
-            // TODO: Lanzar actividad de cámara
+        btnCamera.setOnClickListener {
+            val intent = Intent(this, CameraActivity::class.java)
+            startActivity(intent)
         }
 
-        interpreterButton.setOnClickListener {
-            // TODO: Lanzar actividad de intérprete
+        btnInterpreter.setOnClickListener {
+            val intent = Intent(this, InterpreterActivity::class.java)
+            startActivity(intent)
         }
     }
 }
