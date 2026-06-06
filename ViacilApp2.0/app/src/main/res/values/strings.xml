@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Viacil</string>
     <string name="subtitle">Traducción e interpretación accesible</string>
-    <string name="btn_camera">Abrir Cámara</string>
-    <string name="btn_interpreter">Intérprete de Señas</string>
+    <string name="btn_camera">Cámara</string>
+    <string name="btn_interpreter">Intérprete</string>
     <string name="btn_translation">Traducción</string>
     <string name="loading">Cargando...</string>
     <string name="error">Ocurrió un error. Inténtalo de nuevo.</string>
