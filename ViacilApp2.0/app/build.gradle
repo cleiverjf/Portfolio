@@ -44,9 +44,12 @@ dependencies {
     implementation 'androidx.camera:camera-lifecycle:1.3.4'
     implementation 'androidx.camera:camera-view:1.3.4'
     implementation 'com.google.mlkit:text-recognition:16.0.0'
-    implementation 'com.google.mlkit:translate:17.0.3'   // <-- CORREGIDO
+    implementation 'com.google.mlkit:translate:17.0.3'
     implementation 'androidx.recyclerview:recyclerview:1.3.2'
     implementation 'androidx.datastore:datastore-preferences:1.1.1'
+
+    // Splash Screen API
+    implementation 'androidx.core:core-splashscreen:1.0.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
